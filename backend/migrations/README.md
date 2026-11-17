@@ -1,1 +1,3 @@
 Schema version 1: SQLAlchemy metadata creates users/samples/batches/evidence/audit. seed_demo initializes the separate invoices fixture table and NOLOGIN query_reader. invoices is the only permitted SQL source. Run `python -m scripts.seed_demo` for repeatable initialization; natural keys preserve user edits.
+
+Schema version 2: 增加 `index_trials`（普通组合索引试验，含建前/建后计划、比较结果、验证证据摘要、决定与归属 token）和 `index_trial_events`（状态迁移原因留痕）。`index_trials` 上有一个部分唯一索引 `ux_index_trials_active_group`，仅约束活动状态（pending/building/verifying/verified/retained），保证同一列组同时只有一个活动试验。试验索引名形如 `idx_trial_invoices_<hash>`，通过 `COMMENT ON INDEX` 记录 `index-trial:<id>:<token>` 归属。

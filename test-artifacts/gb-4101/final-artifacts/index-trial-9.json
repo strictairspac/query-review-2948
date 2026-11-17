@@ -1,0 +1,693 @@
+{
+  "id": 9,
+  "column_group": "status,temperature",
+  "columns": [
+    "status",
+    "temperature"
+  ],
+  "index_name": "idx_trial_invoices_1238589ed73c",
+  "sample_id": 1,
+  "status": "verified",
+  "requested_by": "admin@chenggang.test",
+  "requested_reason": "并发列组",
+  "decision": null,
+  "decision_reason": null,
+  "decision_by": null,
+  "decision_evidence_sha256": null,
+  "evidence_sha256": "0d901b50bb08c545635911305b5bf9f93cc74e62d10cf12da11f100cee7ed26d",
+  "decided_at": null,
+  "last_error": null,
+  "created_at": "2026-11-17 17:04:30.920956",
+  "updated_at": "2026-11-17 17:04:31.036262",
+  "index_ownership": {
+    "trial_id": 9,
+    "index_name": "idx_trial_invoices_1238589ed73c",
+    "column_group": "status,temperature",
+    "attribution": "index-trial:#9",
+    "marker_sha256": "a71a0ee524270bb4201618633e72deae13d695b0bcead50aa67fe676bae7f91c"
+  },
+  "plan_before": {
+    "columns": [
+      "customer",
+      "total"
+    ],
+    "row_count": 3,
+    "elapsed_ms": 42.77,
+    "plan": [
+      {
+        "Plan": {
+          "Node Type": "Unique",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 4127.48,
+          "Total Cost": 12385.44,
+          "Plan Rows": 3,
+          "Plan Width": 45,
+          "Actual Startup Time": 14.787,
+          "Actual Total Time": 44.613,
+          "Actual Rows": 3.0,
+          "Actual Loops": 1,
+          "Disabled": false,
+          "Shared Hit Blocks": 7264,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Incremental Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 4127.48,
+              "Total Cost": 12384.44,
+              "Plan Rows": 200,
+              "Plan Width": 45,
+              "Actual Startup Time": 14.787,
+              "Actual Total Time": 44.592,
+              "Actual Rows": 600.0,
+              "Actual Loops": 1,
+              "Disabled": false,
+              "Sort Key": [
+                "i.customer",
+                "((SubPlan 1))"
+              ],
+              "Presorted Key": [
+                "i.customer"
+              ],
+              "Full-sort Groups": {
+                "Group Count": 3,
+                "Sort Methods Used": [
+                  "quicksort"
+                ],
+                "Sort Space Memory": {
+                  "Average Sort Space Used": 27,
+                  "Peak Sort Space Used": 27
+                }
+              },
+              "Pre-sorted Groups": {
+                "Group Count": 3,
+                "Sort Methods Used": [
+                  "quicksort"
+                ],
+                "Sort Space Memory": {
+                  "Average Sort Space Used": 32,
+                  "Peak Sort Space Used": 32
+                }
+              },
+              "Shared Hit Blocks": 7264,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Index Only Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Scan Direction": "Forward",
+                  "Index Name": "idx_trial_invoices_cd12d2580b8f",
+                  "Relation Name": "invoices",
+                  "Alias": "i",
+                  "Startup Cost": 0.28,
+                  "Total Cost": 12375.83,
+                  "Plan Rows": 200,
+                  "Plan Width": 45,
+                  "Actual Startup Time": 0.093,
+                  "Actual Total Time": 44.48,
+                  "Actual Rows": 600.0,
+                  "Actual Loops": 1,
+                  "Disabled": false,
+                  "Filter": "((SubPlan 2) > '100'::numeric)",
+                  "Rows Removed by Filter": 0,
+                  "Heap Fetches": 601,
+                  "Index Searches": 1,
+                  "Shared Hit Blocks": 7258,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0,
+                  "Plans": [
+                    {
+                      "Node Type": "Aggregate",
+                      "Strategy": "Plain",
+                      "Partial Mode": "Simple",
+                      "Parent Relationship": "SubPlan",
+                      "Subplan Name": "SubPlan 1",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 15.39,
+                      "Total Cost": 15.4,
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Actual Startup Time": 0.037,
+                      "Actual Total Time": 0.037,
+                      "Actual Rows": 1.0,
+                      "Actual Loops": 600,
+                      "Disabled": false,
+                      "Shared Hit Blocks": 3600,
+                      "Shared Read Blocks": 0,
+                      "Shared Dirtied Blocks": 0,
+                      "Shared Written Blocks": 0,
+                      "Local Hit Blocks": 0,
+                      "Local Read Blocks": 0,
+                      "Local Dirtied Blocks": 0,
+                      "Local Written Blocks": 0,
+                      "Temp Read Blocks": 0,
+                      "Temp Written Blocks": 0,
+                      "Plans": [
+                        {
+                          "Node Type": "Seq Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Relation Name": "invoices",
+                          "Alias": "j",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 15.0,
+                          "Plan Rows": 156,
+                          "Plan Width": 5,
+                          "Actual Startup Time": 0.001,
+                          "Actual Total Time": 0.032,
+                          "Actual Rows": 156.0,
+                          "Actual Loops": 600,
+                          "Disabled": false,
+                          "Filter": "((temperature <= '8'::numeric) AND (customer = i.customer))",
+                          "Rows Removed by Filter": 444,
+                          "Shared Hit Blocks": 3600,
+                          "Shared Read Blocks": 0,
+                          "Shared Dirtied Blocks": 0,
+                          "Shared Written Blocks": 0,
+                          "Local Hit Blocks": 0,
+                          "Local Read Blocks": 0,
+                          "Local Dirtied Blocks": 0,
+                          "Local Written Blocks": 0,
+                          "Temp Read Blocks": 0,
+                          "Temp Written Blocks": 0
+                        }
+                      ]
+                    },
+                    {
+                      "Node Type": "Aggregate",
+                      "Strategy": "Plain",
+                      "Partial Mode": "Simple",
+                      "Parent Relationship": "SubPlan",
+                      "Subplan Name": "SubPlan 2",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 15.39,
+                      "Total Cost": 15.4,
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Actual Startup Time": 0.036,
+                      "Actual Total Time": 0.036,
+                      "Actual Rows": 1.0,
+                      "Actual Loops": 600,
+                      "Disabled": false,
+                      "Shared Hit Blocks": 3600,
+                      "Shared Read Blocks": 0,
+                      "Shared Dirtied Blocks": 0,
+                      "Shared Written Blocks": 0,
+                      "Local Hit Blocks": 0,
+                      "Local Read Blocks": 0,
+                      "Local Dirtied Blocks": 0,
+                      "Local Written Blocks": 0,
+                      "Temp Read Blocks": 0,
+                      "Temp Written Blocks": 0,
+                      "Plans": [
+                        {
+                          "Node Type": "Seq Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Relation Name": "invoices",
+                          "Alias": "k",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 15.0,
+                          "Plan Rows": 156,
+                          "Plan Width": 5,
+                          "Actual Startup Time": 0.001,
+                          "Actual Total Time": 0.031,
+                          "Actual Rows": 156.0,
+                          "Actual Loops": 600,
+                          "Disabled": false,
+                          "Filter": "((temperature <= '8'::numeric) AND (customer = i.customer))",
+                          "Rows Removed by Filter": 444,
+                          "Shared Hit Blocks": 3600,
+                          "Shared Read Blocks": 0,
+                          "Shared Dirtied Blocks": 0,
+                          "Shared Written Blocks": 0,
+                          "Local Hit Blocks": 0,
+                          "Local Read Blocks": 0,
+                          "Local Dirtied Blocks": 0,
+                          "Local Written Blocks": 0,
+                          "Temp Read Blocks": 0,
+                          "Temp Written Blocks": 0
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 150,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.194,
+        "Triggers": [],
+        "Execution Time": 44.641
+      }
+    ],
+    "result_checksum": "dd3ae2da7d61804d42f9591fc99fe6c8ea8cc78304c1a60ead5584a0d4406ce2"
+  },
+  "plan_after": {
+    "columns": [
+      "customer",
+      "total"
+    ],
+    "row_count": 3,
+    "elapsed_ms": 41.623,
+    "plan": [
+      {
+        "Plan": {
+          "Node Type": "Unique",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 4127.48,
+          "Total Cost": 12385.44,
+          "Plan Rows": 3,
+          "Plan Width": 45,
+          "Actual Startup Time": 14.73,
+          "Actual Total Time": 44.956,
+          "Actual Rows": 3.0,
+          "Actual Loops": 1,
+          "Disabled": false,
+          "Shared Hit Blocks": 7258,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Incremental Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 4127.48,
+              "Total Cost": 12384.44,
+              "Plan Rows": 200,
+              "Plan Width": 45,
+              "Actual Startup Time": 14.73,
+              "Actual Total Time": 44.934,
+              "Actual Rows": 600.0,
+              "Actual Loops": 1,
+              "Disabled": false,
+              "Sort Key": [
+                "i.customer",
+                "((SubPlan 1))"
+              ],
+              "Presorted Key": [
+                "i.customer"
+              ],
+              "Full-sort Groups": {
+                "Group Count": 3,
+                "Sort Methods Used": [
+                  "quicksort"
+                ],
+                "Sort Space Memory": {
+                  "Average Sort Space Used": 27,
+                  "Peak Sort Space Used": 27
+                }
+              },
+              "Pre-sorted Groups": {
+                "Group Count": 3,
+                "Sort Methods Used": [
+                  "quicksort"
+                ],
+                "Sort Space Memory": {
+                  "Average Sort Space Used": 32,
+                  "Peak Sort Space Used": 32
+                }
+              },
+              "Shared Hit Blocks": 7258,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Index Only Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Scan Direction": "Forward",
+                  "Index Name": "idx_trial_invoices_cd12d2580b8f",
+                  "Relation Name": "invoices",
+                  "Alias": "i",
+                  "Startup Cost": 0.28,
+                  "Total Cost": 12375.83,
+                  "Plan Rows": 200,
+                  "Plan Width": 45,
+                  "Actual Startup Time": 0.097,
+                  "Actual Total Time": 44.83,
+                  "Actual Rows": 600.0,
+                  "Actual Loops": 1,
+                  "Disabled": false,
+                  "Filter": "((SubPlan 2) > '100'::numeric)",
+                  "Rows Removed by Filter": 0,
+                  "Heap Fetches": 600,
+                  "Index Searches": 1,
+                  "Shared Hit Blocks": 7258,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0,
+                  "Plans": [
+                    {
+                      "Node Type": "Aggregate",
+                      "Strategy": "Plain",
+                      "Partial Mode": "Simple",
+                      "Parent Relationship": "SubPlan",
+                      "Subplan Name": "SubPlan 1",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 15.39,
+                      "Total Cost": 15.4,
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Actual Startup Time": 0.038,
+                      "Actual Total Time": 0.038,
+                      "Actual Rows": 1.0,
+                      "Actual Loops": 600,
+                      "Disabled": false,
+                      "Shared Hit Blocks": 3600,
+                      "Shared Read Blocks": 0,
+                      "Shared Dirtied Blocks": 0,
+                      "Shared Written Blocks": 0,
+                      "Local Hit Blocks": 0,
+                      "Local Read Blocks": 0,
+                      "Local Dirtied Blocks": 0,
+                      "Local Written Blocks": 0,
+                      "Temp Read Blocks": 0,
+                      "Temp Written Blocks": 0,
+                      "Plans": [
+                        {
+                          "Node Type": "Seq Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Relation Name": "invoices",
+                          "Alias": "j",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 15.0,
+                          "Plan Rows": 156,
+                          "Plan Width": 5,
+                          "Actual Startup Time": 0.001,
+                          "Actual Total Time": 0.031,
+                          "Actual Rows": 156.0,
+                          "Actual Loops": 600,
+                          "Disabled": false,
+                          "Filter": "((temperature <= '8'::numeric) AND (customer = i.customer))",
+                          "Rows Removed by Filter": 444,
+                          "Shared Hit Blocks": 3600,
+                          "Shared Read Blocks": 0,
+                          "Shared Dirtied Blocks": 0,
+                          "Shared Written Blocks": 0,
+                          "Local Hit Blocks": 0,
+                          "Local Read Blocks": 0,
+                          "Local Dirtied Blocks": 0,
+                          "Local Written Blocks": 0,
+                          "Temp Read Blocks": 0,
+                          "Temp Written Blocks": 0
+                        }
+                      ]
+                    },
+                    {
+                      "Node Type": "Aggregate",
+                      "Strategy": "Plain",
+                      "Partial Mode": "Simple",
+                      "Parent Relationship": "SubPlan",
+                      "Subplan Name": "SubPlan 2",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 15.39,
+                      "Total Cost": 15.4,
+                      "Plan Rows": 1,
+                      "Plan Width": 32,
+                      "Actual Startup Time": 0.036,
+                      "Actual Total Time": 0.036,
+                      "Actual Rows": 1.0,
+                      "Actual Loops": 600,
+                      "Disabled": false,
+                      "Shared Hit Blocks": 3600,
+                      "Shared Read Blocks": 0,
+                      "Shared Dirtied Blocks": 0,
+                      "Shared Written Blocks": 0,
+                      "Local Hit Blocks": 0,
+                      "Local Read Blocks": 0,
+                      "Local Dirtied Blocks": 0,
+                      "Local Written Blocks": 0,
+                      "Temp Read Blocks": 0,
+                      "Temp Written Blocks": 0,
+                      "Plans": [
+                        {
+                          "Node Type": "Seq Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Relation Name": "invoices",
+                          "Alias": "k",
+                          "Startup Cost": 0.0,
+                          "Total Cost": 15.0,
+                          "Plan Rows": 156,
+                          "Plan Width": 5,
+                          "Actual Startup Time": 0.001,
+                          "Actual Total Time": 0.031,
+                          "Actual Rows": 156.0,
+                          "Actual Loops": 600,
+                          "Disabled": false,
+                          "Filter": "((temperature <= '8'::numeric) AND (customer = i.customer))",
+                          "Rows Removed by Filter": 444,
+                          "Shared Hit Blocks": 3600,
+                          "Shared Read Blocks": 0,
+                          "Shared Dirtied Blocks": 0,
+                          "Shared Written Blocks": 0,
+                          "Local Hit Blocks": 0,
+                          "Local Read Blocks": 0,
+                          "Local Dirtied Blocks": 0,
+                          "Local Written Blocks": 0,
+                          "Temp Read Blocks": 0,
+                          "Temp Written Blocks": 0
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 22,
+          "Shared Read Blocks": 1,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.117,
+        "Triggers": [],
+        "Execution Time": 44.97
+      }
+    ],
+    "result_checksum": "dd3ae2da7d61804d42f9591fc99fe6c8ea8cc78304c1a60ead5584a0d4406ce2"
+  },
+  "comparison": {
+    "before": {
+      "planning_time_ms": 0.194,
+      "execution_time_ms": 44.641,
+      "total_cost": 12385.44,
+      "plan_rows": 3,
+      "actual_rows": 3.0,
+      "node_types": [
+        "Unique",
+        "Incremental Sort",
+        "Index Only Scan",
+        "Aggregate",
+        "Seq Scan",
+        "Aggregate",
+        "Seq Scan"
+      ],
+      "scan_nodes": [
+        {
+          "node_type": "Index Only Scan",
+          "relation": "invoices",
+          "index": "idx_trial_invoices_cd12d2580b8f",
+          "actual_rows": 600.0
+        },
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 156.0
+        },
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 156.0
+        }
+      ],
+      "seq_scan_count": 2,
+      "index_scan_count": 1,
+      "shared_hit_blocks": 7264,
+      "shared_read_blocks": 0
+    },
+    "after": {
+      "planning_time_ms": 0.117,
+      "execution_time_ms": 44.97,
+      "total_cost": 12385.44,
+      "plan_rows": 3,
+      "actual_rows": 3.0,
+      "node_types": [
+        "Unique",
+        "Incremental Sort",
+        "Index Only Scan",
+        "Aggregate",
+        "Seq Scan",
+        "Aggregate",
+        "Seq Scan"
+      ],
+      "scan_nodes": [
+        {
+          "node_type": "Index Only Scan",
+          "relation": "invoices",
+          "index": "idx_trial_invoices_cd12d2580b8f",
+          "actual_rows": 600.0
+        },
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 156.0
+        },
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 156.0
+        }
+      ],
+      "seq_scan_count": 2,
+      "index_scan_count": 1,
+      "shared_hit_blocks": 7258,
+      "shared_read_blocks": 0
+    },
+    "cost_delta_ratio": 0.0,
+    "execution_delta_ms": 0.329,
+    "execution_delta_ratio": 0.74,
+    "index_used_after": false,
+    "indexes_used_after": [
+      "idx_trial_invoices_cd12d2580b8f"
+    ],
+    "trial_index_used": [],
+    "results_unchanged": true,
+    "verdict": "建后优化器未选择本次试验索引（数据量小或选择度低时属正常）；估算总代价变化 +0.00%；结果行与摘要一致",
+    "note": "计划与耗时为实际执行采集；耗时受缓存与机器负载影响，单次结果不能断言优化收益。"
+  },
+  "events": [
+    {
+      "id": 30,
+      "from_status": null,
+      "to_status": "pending",
+      "reason": "并发列组",
+      "actor": "admin@chenggang.test",
+      "detail": {
+        "columns": [
+          "status",
+          "temperature"
+        ],
+        "index_name": "idx_trial_invoices_1238589ed73c"
+      },
+      "created_at": "2026-11-17 17:04:30.920956"
+    },
+    {
+      "id": 31,
+      "from_status": "pending",
+      "to_status": "building",
+      "reason": "开始采集建前计划并创建索引",
+      "actor": "worker",
+      "detail": {
+        "index_name": "idx_trial_invoices_1238589ed73c"
+      },
+      "created_at": "2026-11-17 17:04:30.930441"
+    },
+    {
+      "id": 32,
+      "from_status": "building",
+      "to_status": "verifying",
+      "reason": "索引已建好，开始验证建后计划",
+      "actor": "worker",
+      "detail": null,
+      "created_at": "2026-11-17 17:04:31.033516"
+    },
+    {
+      "id": 33,
+      "from_status": "verifying",
+      "to_status": "verified",
+      "reason": "验证完成，等待管理员复核保留或清理",
+      "actor": "worker",
+      "detail": {
+        "evidence_sha256": "0d901b50bb08c545635911305b5bf9f93cc74e62d10cf12da11f100cee7ed26d",
+        "verdict": "建后优化器未选择本次试验索引（数据量小或选择度低时属正常）；估算总代价变化 +0.00%；结果行与摘要一致"
+      },
+      "created_at": "2026-11-17 17:04:31.036262"
+    }
+  ]
+}

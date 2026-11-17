@@ -95,3 +95,21 @@ ORDER BY customer
 - Web 字体来自 Google Fonts，离线会使用 serif/monospace 回退；不影响功能。
 
 License: MIT，见 LICENSE。
+
+## 普通组合索引试验
+
+结算组需要在账单表上验证普通组合索引时，由 **admin** 在“05 索引试验”页选择 2–4 个业务列发起；operator/viewer 可查看与下载证据，不能发起或发布决定。
+
+生命周期：`pending 待建 → building 建索引中 → verifying 验证中 → verified 待复核 → retained 已保留 / cleaning → cleaned 已清理`，任一步失败进入 `failed`。每次迁移都写入 `index_trial_events`，页面展示“为什么”与操作者。
+
+- **建前/建后真实计划**：建前、建后各执行一次样本 SQL，保存 `EXPLAIN (ANALYZE, FORMAT JSON, BUFFERS)`、耗时、结果行与结果摘要，并比较估算代价、执行耗时、是否走新索引、结果是否一致。耗时会受缓存与负载影响，单次结果不能断言优化收益。
+- **写入与只读**：索引用 `CREATE INDEX CONCURRENTLY` 构建，构建期间账单仍可写；计划采集沿用 `query_reader` + `READ ONLY` 事务，原有查询链路保持只读。
+- **并发与重试**：列组按字典序规范化；索引名由列组确定性生成。同一活动列组有数据库部分唯一索引兜底，并发发起/重复提交复用同一试验，只建一份索引。
+- **失败与中断**：worker 启动与周期恢复扫描 `building/verifying/failed/cleaning`；`building/verifying` 时若索引有效则继续验证，否则删除本次残留（含 `CONCURRENTLY` 失败留下的无标记无效索引）并标记失败。已有索引不动。
+- **归属与清理安全**：索引 `COMMENT` 写入 `index-trial:<试验号>:<token>` 归属标记，所有 DDL 先取列组咨询锁。清理只在归属仍是本试验时删除，因此清理与后发新试验相撞不会误删后者。
+- **复核与保留一致**：发布决定必须携带与本次验证一致的证据摘要（`evidence_sha256`），决定记录同时保存 `decision_evidence_sha256`、原因与操作者；证据与决定分叉会被 409 拒绝。
+- **导出**：`GET /index-trials/{id}/export` 下载 JSON，包含 `index_ownership`（试验号、索引名、列组、归属、标记摘要）、建前建后计划、比较结果、状态轨迹与决定。
+
+API：`GET/POST /index-trials`、`GET /index-trials/{id}`、`POST /index-trials/{id}/decision`、`POST /index-trials/{id}/cleanup`、`GET /index-trials/{id}/export`。环境变量 `ARTIFACT_DIR` 可覆盖证据落盘目录（默认 `/artifacts`）。
+
+Schema 说明见 `backend/migrations/README.md`（v2 增加 `index_trials` 与 `index_trial_events`）。

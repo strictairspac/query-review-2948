@@ -1,0 +1,379 @@
+{
+  "id": 2,
+  "column_group": "amount,route",
+  "columns": [
+    "amount",
+    "route"
+  ],
+  "index_name": "idx_trial_invoices_99a23631ad2a",
+  "sample_id": 2,
+  "status": "verified",
+  "requested_by": "admin@chenggang.test",
+  "requested_reason": "并发5",
+  "decision": null,
+  "decision_reason": null,
+  "decision_by": null,
+  "decision_evidence_sha256": null,
+  "evidence_sha256": "34e20f7506e579cab7056aa90f114d580c0d88cb0dd763d25a45a6f5d0e617a2",
+  "decided_at": null,
+  "last_error": null,
+  "created_at": "2026-11-17 17:03:57.641776",
+  "updated_at": "2026-11-17 17:03:57.722338",
+  "index_ownership": {
+    "trial_id": 2,
+    "index_name": "idx_trial_invoices_99a23631ad2a",
+    "column_group": "amount,route",
+    "attribution": "index-trial:#2",
+    "marker_sha256": "efd6d2619af6372b2fb6fa9559803bf6265bad382ab353ca58287ca389cb5236"
+  },
+  "plan_before": {
+    "columns": [
+      "route",
+      "average"
+    ],
+    "row_count": 2,
+    "elapsed_ms": 0.152,
+    "plan": [
+      {
+        "Plan": {
+          "Node Type": "Aggregate",
+          "Strategy": "Sorted",
+          "Partial Mode": "Simple",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 13.52,
+          "Total Cost": 13.59,
+          "Plan Rows": 3,
+          "Plan Width": 64,
+          "Actual Startup Time": 0.08,
+          "Actual Total Time": 0.096,
+          "Actual Rows": 2.0,
+          "Actual Loops": 1,
+          "Disabled": false,
+          "Group Key": [
+            "route"
+          ],
+          "Shared Hit Blocks": 6,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 13.52,
+              "Total Cost": 13.53,
+              "Plan Rows": 3,
+              "Plan Width": 48,
+              "Actual Startup Time": 0.061,
+              "Actual Total Time": 0.07,
+              "Actual Rows": 515.0,
+              "Actual Loops": 1,
+              "Disabled": false,
+              "Sort Key": [
+                "route"
+              ],
+              "Sort Method": "quicksort",
+              "Sort Space Used": 41,
+              "Sort Space Type": "Memory",
+              "Shared Hit Blocks": 6,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Relation Name": "invoices",
+                  "Alias": "invoices",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 13.5,
+                  "Plan Rows": 3,
+                  "Plan Width": 48,
+                  "Actual Startup Time": 0.005,
+                  "Actual Total Time": 0.035,
+                  "Actual Rows": 515.0,
+                  "Actual Loops": 1,
+                  "Disabled": false,
+                  "Filter": "(status = 'settled'::text)",
+                  "Rows Removed by Filter": 85,
+                  "Shared Hit Blocks": 6,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 6,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.033,
+        "Triggers": [],
+        "Execution Time": 0.103
+      }
+    ],
+    "result_checksum": "f30838267652f8a3eb4236638adef7cee5ecee9b44208430e8d2a6060095bcb3"
+  },
+  "plan_after": {
+    "columns": [
+      "route",
+      "average"
+    ],
+    "row_count": 2,
+    "elapsed_ms": 0.134,
+    "plan": [
+      {
+        "Plan": {
+          "Node Type": "Aggregate",
+          "Strategy": "Sorted",
+          "Partial Mode": "Simple",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 13.52,
+          "Total Cost": 13.59,
+          "Plan Rows": 3,
+          "Plan Width": 64,
+          "Actual Startup Time": 0.078,
+          "Actual Total Time": 0.092,
+          "Actual Rows": 2.0,
+          "Actual Loops": 1,
+          "Disabled": false,
+          "Group Key": [
+            "route"
+          ],
+          "Shared Hit Blocks": 6,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 13.52,
+              "Total Cost": 13.53,
+              "Plan Rows": 3,
+              "Plan Width": 48,
+              "Actual Startup Time": 0.062,
+              "Actual Total Time": 0.07,
+              "Actual Rows": 515.0,
+              "Actual Loops": 1,
+              "Disabled": false,
+              "Sort Key": [
+                "route"
+              ],
+              "Sort Method": "quicksort",
+              "Sort Space Used": 41,
+              "Sort Space Type": "Memory",
+              "Shared Hit Blocks": 6,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Relation Name": "invoices",
+                  "Alias": "invoices",
+                  "Startup Cost": 0.0,
+                  "Total Cost": 13.5,
+                  "Plan Rows": 3,
+                  "Plan Width": 48,
+                  "Actual Startup Time": 0.004,
+                  "Actual Total Time": 0.037,
+                  "Actual Rows": 515.0,
+                  "Actual Loops": 1,
+                  "Disabled": false,
+                  "Filter": "(status = 'settled'::text)",
+                  "Rows Removed by Filter": 85,
+                  "Shared Hit Blocks": 6,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        },
+        "Planning": {
+          "Shared Hit Blocks": 22,
+          "Shared Read Blocks": 1,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.055,
+        "Triggers": [],
+        "Execution Time": 0.098
+      }
+    ],
+    "result_checksum": "f30838267652f8a3eb4236638adef7cee5ecee9b44208430e8d2a6060095bcb3"
+  },
+  "comparison": {
+    "before": {
+      "planning_time_ms": 0.033,
+      "execution_time_ms": 0.103,
+      "total_cost": 13.59,
+      "plan_rows": 3,
+      "actual_rows": 2.0,
+      "node_types": [
+        "Aggregate",
+        "Sort",
+        "Seq Scan"
+      ],
+      "scan_nodes": [
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 515.0
+        }
+      ],
+      "seq_scan_count": 1,
+      "index_scan_count": 0,
+      "shared_hit_blocks": 6,
+      "shared_read_blocks": 0
+    },
+    "after": {
+      "planning_time_ms": 0.055,
+      "execution_time_ms": 0.098,
+      "total_cost": 13.59,
+      "plan_rows": 3,
+      "actual_rows": 2.0,
+      "node_types": [
+        "Aggregate",
+        "Sort",
+        "Seq Scan"
+      ],
+      "scan_nodes": [
+        {
+          "node_type": "Seq Scan",
+          "relation": "invoices",
+          "index": null,
+          "actual_rows": 515.0
+        }
+      ],
+      "seq_scan_count": 1,
+      "index_scan_count": 0,
+      "shared_hit_blocks": 6,
+      "shared_read_blocks": 0
+    },
+    "cost_delta_ratio": 0.0,
+    "execution_delta_ms": -0.005,
+    "execution_delta_ratio": -4.85,
+    "index_used_after": false,
+    "indexes_used_after": [],
+    "trial_index_used": [],
+    "results_unchanged": true,
+    "verdict": "建后优化器未选择本次试验索引（数据量小或选择度低时属正常）；估算总代价变化 +0.00%；结果行与摘要一致",
+    "note": "计划与耗时为实际执行采集；耗时受缓存与机器负载影响，单次结果不能断言优化收益。"
+  },
+  "events": [
+    {
+      "id": 4,
+      "from_status": null,
+      "to_status": "pending",
+      "reason": "并发5",
+      "actor": "admin@chenggang.test",
+      "detail": {
+        "columns": [
+          "amount",
+          "route"
+        ],
+        "index_name": "idx_trial_invoices_99a23631ad2a"
+      },
+      "created_at": "2026-11-17 17:03:57.641776"
+    },
+    {
+      "id": 6,
+      "from_status": "pending",
+      "to_status": "building",
+      "reason": "开始采集建前计划并创建索引",
+      "actor": "worker",
+      "detail": {
+        "index_name": "idx_trial_invoices_99a23631ad2a"
+      },
+      "created_at": "2026-11-17 17:03:57.708492"
+    },
+    {
+      "id": 7,
+      "from_status": "building",
+      "to_status": "verifying",
+      "reason": "索引已建好，开始验证建后计划",
+      "actor": "worker",
+      "detail": null,
+      "created_at": "2026-11-17 17:03:57.720148"
+    },
+    {
+      "id": 8,
+      "from_status": "verifying",
+      "to_status": "verified",
+      "reason": "验证完成，等待管理员复核保留或清理",
+      "actor": "worker",
+      "detail": {
+        "evidence_sha256": "34e20f7506e579cab7056aa90f114d580c0d88cb0dd763d25a45a6f5d0e617a2",
+        "verdict": "建后优化器未选择本次试验索引（数据量小或选择度低时属正常）；估算总代价变化 +0.00%；结果行与摘要一致"
+      },
+      "created_at": "2026-11-17 17:03:57.722338"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+INFO:     Started server process [6473]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:48528 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48538 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48550 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48560 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48568 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48582 - "POST /index-trials HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:48596 - "POST /index-trials HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:48604 - "POST /index-trials HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:48614 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48616 - "POST /index-trials HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:48632 - "POST /index-trials HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:48638 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48646 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48686 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48658 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48682 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48656 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48692 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48662 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48676 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48704 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48708 - "GET /index-trials/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48714 - "GET /index-trials/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48716 - "POST /index-trials/1/decision HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:48730 - "POST /index-trials/1/decision HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:48732 - "POST /index-trials/1/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48740 - "GET /index-trials/1/export HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48744 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48754 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48756 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48768 - "POST /index-trials/2/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48782 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48792 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48798 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:48814 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48830 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48832 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48846 - "GET /index-trials/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54220 - "GET /index-trials/5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54234 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54246 - "GET /index-trials/6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54248 - "GET /index-trials/6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54262 - "POST /index-trials/1/cleanup HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54264 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54270 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54284 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:54300 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54308 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54320 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59016 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59022 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59030 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59032 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59048 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59064 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59076 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59092 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56586 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56592 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56602 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56608 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56618 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56624 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56640 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56644 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56646 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56648 - "GET /index-trials/8 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56654 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:56670 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50788 - "GET /index-trials HTTP/1.1" 200 OK

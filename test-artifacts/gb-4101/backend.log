@@ -1,0 +1,677 @@
+INFO:     Started server process [1983]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:42938 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55964 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54722 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54724 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54726 - "POST /auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54742 - "POST /index-trials HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:54748 - "POST /index-trials HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:54752 - "POST /index-trials HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 871, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    |     response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    |     response=await call_next(request)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    |     return await run_in_threadpool(dependant.call, **values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    |     return await anyio.to_thread.run_sync(func, *args)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    |     return await get_async_backend().run_sync_in_worker_thread(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    |     return await future
+    |            ^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    |     result = context.run(func, *args)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    |     trial,reused=create_trial(db,data,user)
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    |     status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+    |                                  ^^^^^^^^^^^^^^^^^
+    | AttributeError: module 'hashlib' has no attribute 'token_hex'
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    response=await call_next(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    trial,reused=create_trial(db,data,user)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+                                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'hashlib' has no attribute 'token_hex'
+INFO:     127.0.0.1:54756 - "POST /index-trials HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 871, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    |     response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    |     response=await call_next(request)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    |     return await run_in_threadpool(dependant.call, **values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    |     return await anyio.to_thread.run_sync(func, *args)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    |     return await get_async_backend().run_sync_in_worker_thread(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    |     return await future
+    |            ^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    |     result = context.run(func, *args)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    |     trial,reused=create_trial(db,data,user)
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    |     status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+    |                                  ^^^^^^^^^^^^^^^^^
+    | AttributeError: module 'hashlib' has no attribute 'token_hex'
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    response=await call_next(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    trial,reused=create_trial(db,data,user)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+                                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'hashlib' has no attribute 'token_hex'
+INFO:     127.0.0.1:54772 - "POST /index-trials HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 871, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    |     response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |   File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    |     self.gen.throw(typ, value, traceback)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    |     response = await self.dispatch_func(request, call_next)
+    |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    |     response=await call_next(request)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    |     raise app_exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    |     await self.app(scope, receive_or_disconnect, send_no_error)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    |     await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    |     await route.handle(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    |     await self.app(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    |     await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    |     raise exc
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    |     await app(scope, receive, sender)
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    |     response = await f(request)
+    |                ^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    |     raw_response = await run_endpoint_function(
+    |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    |     return await run_in_threadpool(dependant.call, **values)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    |     return await anyio.to_thread.run_sync(func, *args)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    |     return await get_async_backend().run_sync_in_worker_thread(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    |     return await future
+    |            ^^^^^^^^^^^^
+    |   File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    |     result = context.run(func, *args)
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    |     trial,reused=create_trial(db,data,user)
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    |     status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+    |                                  ^^^^^^^^^^^^^^^^^
+    | AttributeError: module 'hashlib' has no attribute 'token_hex'
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/request_id.py", line 5, in dispatch
+    response=await call_next(request);response.headers['X-Request-ID']=str(uuid.uuid4());return response
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 185, in __call__
+    with collapse_excgroups():
+  File "/usr/lib/python3.11/contextlib.py", line 155, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 187, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/middlewares/audit.py", line 8, in dispatch
+    response=await call_next(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 163, in call_next
+    raise app_exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/base.py", line 149, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/node/.local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/routes/index_trial.py", line 28, in create
+    trial,reused=create_trial(db,data,user)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/backend/src/services/index_trial.py", line 170, in create_trial
+    status='pending',owner_token=hashlib.token_hex(16),requested_by=user.email,
+                                 ^^^^^^^^^^^^^^^^^
+AttributeError: module 'hashlib' has no attribute 'token_hex'
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [1983]
+INFO:     Started server process [2059]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:33128 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41994 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:42004 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:42016 - "GET /index-trials HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55906 - "POST /index-trials/1/decision HTTP/1.1" 409 Conflict
+INFO:     127.0.0.1:55918 - "POST /index-trials/1/decision HTTP/1.1" 403 Forbidden
+INFO:     127.0.0.1:55924 - "GET /index-trials/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55934 - "POST /index-trials/1/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52602 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51344 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51350 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51370 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51362 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51376 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51378 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51414 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51396 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51410 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:51392 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:60106 - "GET /index-trials/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60116 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60130 - "POST /index-trials/2/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54224 - "GET /index-trials/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38536 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46226 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:45932 - "GET /index-trials/11 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46950 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:46952 - "GET /index-trials/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42848 - "GET /index-trials/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60882 - "GET /index-trials/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60892 - "POST /index-trials/12/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60906 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:49312 - "GET /index-trials/12 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49326 - "GET /index-trials/13 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41714 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:37360 - "GET /index-trials/14 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37376 - "POST /index-trials/14/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37386 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:46928 - "POST /index-trials HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:38588 - "GET /index-trials/16 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38598 - "POST /index-trials/16/decision HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59286 - "GET /index-trials/16 HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2059]
+INFO:     Started server process [2655]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:18000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:35334 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [2655]
